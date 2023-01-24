@@ -109,6 +109,9 @@ inline fun <reified T> safeCast(any: Any?, block: (T) -> Unit) {
     if (any is T) {
         block.invoke(any)
     }
+    /*safeCast<T>(any)?.let{
+
+    }*/
 }
 
 inline fun <reified T> safeToCast(any: Any?): T? {
