@@ -11,7 +11,7 @@ import org.json.JSONException
 fun executeAfterDelay(
     executeTimes: Int = 1,
     initialDelay: Long = 1000L,
-    repeatDelay: Long = 0L,
+    repeatDelay: Long = initialDelay,
     action: (count: Int, executeTimes: Int) -> Unit
 ) {
     //execute time 0 or less then 0 means infinite execution
