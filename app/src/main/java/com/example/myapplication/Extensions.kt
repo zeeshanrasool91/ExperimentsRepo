@@ -106,12 +106,12 @@ inline fun <reified T> safeCast(any: Any?): T? {
 }
 
 inline fun <reified T> safeCast(any: Any?, block: (T) -> Unit) {
-    if (any is T) {
+    /*if (any is T) {
         block.invoke(any)
-    }
-    /*safeCast<T>(any)?.let{
-
     }*/
+    safeCast<T>(any)?.let{ an  ->
+        block.invoke(an)
+    }
 }
 
 inline fun <reified T> safeToCast(any: Any?): T? {
@@ -119,8 +119,11 @@ inline fun <reified T> safeToCast(any: Any?): T? {
 }
 
 inline fun <reified T> safeToCast(any: Any?, block: (T) -> Unit) {
-    (any as? T)?.let {
+    /*(any as? T)?.let {
         block.invoke(any)
+    }*/
+    safeToCast<T>(any)?.let{ an  ->
+        block.invoke(an)
     }
 }
 
