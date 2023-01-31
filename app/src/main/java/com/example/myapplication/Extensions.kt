@@ -147,7 +147,7 @@ val String.cleanTextContent: String
         return text.trim()
     }
 
-fun String.decodeJwtToken(): JSONObject {
+fun String.decodeJwtToken(): JSONObject? {
     val token = this
     val payloadIndex = 1
     val parts = token.split("\\.".toRegex()).toTypedArray()
@@ -157,15 +157,15 @@ fun String.decodeJwtToken(): JSONObject {
         return try {
             JSONObject(base64)
         } catch (e: Exception) {
-            JSONObject()
+            null
         }
     }
     return JSONObject()
 }
 
-fun String.getValue(key: String): String {
+fun String.getValue(key: String): String? {
     val token = this
-    val payload = token.decodeJwtToken()
+    val payload = token.decodeJwtToken() ?: return null
     return if (payload.has(key)) {
         payload.getString(key) ?: ""
     } else {
@@ -204,16 +204,32 @@ fun String.isTokenExpired(key: String = "exp", allowedTimeDifference: Int = 5): 
     }
     val currentTime = System.currentTimeMillis()
     val exp = token.getValue(key = key)
-    val tokenExpiryTime = if (TextUtils.isEmpty(exp)) {
-        -1L
-    } else {
-        exp.toLong() * 1000
+
+    val tokenExpiryTime = when {
+        TextUtils.isEmpty(exp) -> {
+            -1L
+        }
+        exp == null -> {
+            -2L
+        }
+        else -> {
+            exp.toLong() * 1000
+        }
     }
-    if (tokenExpiryTime == -1L) {
-        return true
+    return when (tokenExpiryTime) {
+        -1L -> {
+            false
+        }
+
+        -2L -> {
+            true
+        }
+
+        else -> {
+            val difference = tokenExpiryTime - currentTime
+            difference < (allowedTimeDifference * 60000)
+        }
     }
-    val difference = tokenExpiryTime - currentTime
-    return difference < (allowedTimeDifference * 60000)
 }
 
 
