@@ -15,26 +15,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        //JWTUtils.decoded("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ")
+
+
         //Log.d(TAG, "onCreate1: "+ safeCast<EmptyActivity>(this))
         //Log.d(TAG, "onCreate1: "+ safeCast<EmptyActivity>(this))
         //val testJson="[{LotDescription:David Weekley homes Traditional Collection in Baxter Village offers floor plans featuring innovative design and unsurpassed quality. This charming community combines work, play and living, all within the Village. In Baxter Village, you&rsquo;ll enjoy:&nbsp; Parks, playgrounds}]"
         //Log.d(TAG, "CharSets: "+ testJson.decodeJwtToken())
         //val json = "{\"property:\":\"line1\n,line2\"}"
-        val json = "{property:\":\"line1\n,line2\"}"
-        val jsonSanitized = JsonSanitizer.sanitize(json)
+        //val json = "{property:\":\"line1\n,line2\"}"
+        val jwtToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNWI0MDljNmYyMmM0MDNlMWY5MWY5ODY3YWM0OTJhOTA2MTk1NTgiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiWmVlc2hhbiBSYXNvb2wiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNmpYWlhDNWpMM3BPUnJmOHNsYVNJSzJxYzJwdGtXZHZXX2NUdTY9czk2LWMiLCJmYW1pbHlfaWQiOiIwMUdRQ0tLTThLSFZCQzg1R1cwV1cyOUhBRiIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9mYW1pbHlrZWVwZXItbWFpbiIsImF1ZCI6ImZhbWlseWtlZXBlci1tYWluIiwiYXV0aF90aW1lIjoxNjc0NTY2NTU3LCJ1c2VyX2lkIjoialVLVmZzbDFtUmZYSUNxQ0VNWXJHckVQUmU5MyIsInN1YiI6ImpVS1Zmc2wxbVJmWElDcUNFTVlyR3JFUFJlOTMiLCJpYXQiOjE2NzUxNTkyODIsImV4cCI6MTY3NTE2Mjg4MiwiZW1haWwiOiJ6ZWVzaGFuLnJhc29vbEByZWFzb25sYWJzLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTA1NDczNDQ3ODgwNzU2MDU2Nzk1Il0sImVtYWlsIjpbInplZXNoYW4ucmFzb29sQHJlYXNvbmxhYnMuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.OV0G6rUjZDRznwO7VqOJn8v9I5eMYtBYwrYLm5KDnioDARnDt9HgFc07N5Z0iZPqFkgLMLnEgyn9VUxZrnuvuj87Ec-5-qOC4HzLXL3ekqmFMtr3vwX6aAq9kfLOk3zJtUYxhgQEbrf563QpEWrdIKI3bVvVnGSu8PQlO8oKA_55jQYZ1w3PyCEyuBs90hdC03uabBSWCQflVi5bFeQYEhOiEF1aSs1DjQGUWmlHLRo2rlUOigO6VNRgRP9chWrIiBfwaqgk_LJtZ9_Xk8dKeZCVSkE2FmBwFWqYXrM65xz6JqyHbgcBzEMA978ZptCSAPIX8Z0iCw6z8dML9YaOUA"
+        val test= jwtToken.getValue("exp")
+        Log.d(TAG, "onCreate: "+test)
+        //val jsonSanitized = JsonSanitizer.sanitize(json)
         val gson = GsonBuilder()
             .setPrettyPrinting()
             .setLenient()
             .create()
         try {
-            val jsonObject = gson.fromJson(jsonSanitized, JsonObject::class.java)
-            Log.d(TAG, "onCreate 1: $jsonObject")
+            //val jsonObject = gson.fromJson(jsonSanitized, JsonObject::class.java)
+            //Log.d(TAG, "onCreate 1: $jsonObject")
         } catch (e: Exception) {
             e.printStackTrace()
         }
         //Log.d(TAG, "CharSets: "+ json.decodeJwtToken())
-        val jObj = JSONObject(jsonSanitized)
-        Log.d(TAG, "onCreate 2: $jObj")
+        //val jObj = JSONObject(jsonSanitized)
+        //Log.d(TAG, "onCreate 2: $jObj")
         //safeCast<EmptyActivity>(this){
         //it.actionBar
         //}
