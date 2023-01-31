@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Base64
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
@@ -160,7 +161,7 @@ fun String.decodeJwtToken(): JSONObject? {
             null
         }
     }
-    return JSONObject()
+    return null
 }
 
 fun String.getValue(key: String): String? {
@@ -204,18 +205,21 @@ fun String.isTokenExpired(key: String = "exp", allowedTimeDifference: Int = 5): 
     }
     val currentTime = System.currentTimeMillis()
     val exp = token.getValue(key = key)
-
     val tokenExpiryTime = when {
-        TextUtils.isEmpty(exp) -> {
-            -1L
-        }
         exp == null -> {
             -2L
         }
+
+        exp.isEmpty() -> {
+            -1L
+        }
+
         else -> {
             exp.toLong() * 1000
         }
     }
+
+    Log.d(TAG, "getValue: $exp")
     return when (tokenExpiryTime) {
         -1L -> {
             false
