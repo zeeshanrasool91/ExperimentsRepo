@@ -3,7 +3,6 @@ package com.example.myapplication
 import android.os.Handler
 import android.os.Looper
 import android.util.Base64
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
@@ -148,8 +147,12 @@ val String.cleanTextContent: String
     }
 
 fun String.decodeJwtToken(): JSONObject {
+    val headerIndex = 0
+    val payloadIndex = 1
+    val signatureIndex = 2
+    val jwtParts = 3
     val parts = this.split("\\.".toRegex()).toTypedArray()
-    val payload = parts.getOrNull(1)
+    val payload = parts.getOrNull(payloadIndex)
     val base64String = payload?.decodeFromBase64()
     base64String.ifNotNullNotEmpty { base64 ->
         return try {
@@ -172,7 +175,7 @@ fun String.getValue(key: String): String {
 
 fun String.decodeFromBase64(): String {
     return try {
-        Base64.decode(this, Base64.DEFAULT).toString(charset(Charsets.UTF_8.name()))
+        Base64.decode(this, Base64.URL_SAFE).toString(charset(Charsets.UTF_8.name()))
     } catch (e: Exception) {
         e.printStackTrace()
         ""

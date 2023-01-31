@@ -3,10 +3,6 @@ package com.example.myapplication
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
-import org.json.JSONObject
-import java.io.StringReader
 
 
 class MainActivity : AppCompatActivity() {
