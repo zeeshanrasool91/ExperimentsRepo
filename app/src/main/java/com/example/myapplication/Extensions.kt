@@ -172,7 +172,7 @@ fun String.getValue(key: String): String {
 
 fun String.decodeFromBase64(): String {
     return try {
-        Base64.decode(this, Base64.URL_SAFE).toString(charset(Charsets.UTF_8.name()))
+        Base64.decode(this, Base64.DEFAULT).toString(charset(Charsets.UTF_8.name()))
     } catch (e: Exception) {
         e.printStackTrace()
         ""
