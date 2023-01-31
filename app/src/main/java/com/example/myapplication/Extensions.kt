@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.os.Handler
 import android.os.Looper
+import android.text.TextUtils
 import android.util.Base64
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
@@ -147,11 +148,9 @@ val String.cleanTextContent: String
     }
 
 fun String.decodeJwtToken(): JSONObject {
-    val headerIndex = 0
+    val token = this
     val payloadIndex = 1
-    val signatureIndex = 2
-    val jwtParts = 3
-    val parts = this.split("\\.".toRegex()).toTypedArray()
+    val parts = token.split("\\.".toRegex()).toTypedArray()
     val payload = parts.getOrNull(payloadIndex)
     val base64String = payload?.decodeFromBase64()
     base64String.ifNotNullNotEmpty { base64 ->
@@ -165,7 +164,8 @@ fun String.decodeJwtToken(): JSONObject {
 }
 
 fun String.getValue(key: String): String {
-    val payload = decodeJwtToken()
+    val token = this
+    val payload = token.decodeJwtToken()
     return if (payload.has(key)) {
         payload.getString(key) ?: ""
     } else {
@@ -195,6 +195,25 @@ inline fun String?.ifNotNullNotEmpty(block: (String) -> Unit) {
     if (!this.isNullOrEmpty()) {
         block(this)
     }
+}
+
+fun String.isTokenExpired(key: String = "exp", allowedTimeDifference: Int = 5): Boolean {
+    val token = this
+    if (token.isEmpty()) {
+        return false
+    }
+    val currentTime = System.currentTimeMillis()
+    val exp = token.getValue(key = key)
+    val tokenExpiryTime = if (TextUtils.isEmpty(exp)) {
+        -1L
+    } else {
+        exp.toLong() * 1000
+    }
+    if (tokenExpiryTime == -1L) {
+        return true
+    }
+    val difference = tokenExpiryTime - currentTime
+    return difference < (allowedTimeDifference * 60000)
 }
 
 
