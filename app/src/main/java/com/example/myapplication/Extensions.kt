@@ -2,11 +2,16 @@ package com.example.myapplication
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import org.json.JSONException
+import org.json.JSONObject
+import java.util.regex.Pattern
+
 
 fun executeAfterDelay(
     executeTimes: Int = 1,
@@ -109,7 +114,7 @@ inline fun <reified T> safeCast(any: Any?, block: (T) -> Unit) {
     /*if (any is T) {
         block.invoke(any)
     }*/
-    safeCast<T>(any)?.let{ an  ->
+    safeCast<T>(any)?.let { an ->
         block.invoke(an)
     }
 }
@@ -122,8 +127,70 @@ inline fun <reified T> safeToCast(any: Any?, block: (T) -> Unit) {
     /*(any as? T)?.let {
         block.invoke(any)
     }*/
-    safeToCast<T>(any)?.let{ an  ->
+    safeToCast<T>(any)?.let { an ->
         block.invoke(an)
+    }
+}
+
+
+val String.cleanTextContent: String
+    get() {
+        // strips off all non-ASCII characters
+        var text = this
+        text = text.replace("[^\\x00-\\x7F]".toRegex(), "")
+
+        // erases all the ASCII control characters
+        text = text.replace("\\p{Cntrl}&&[^\r\n\t]".toRegex(), "")
+
+        // removes non-printable characters from Unicode
+        text = text.replace("\\p{C}".toRegex(), "")
+        return text.trim()
+    }
+
+fun String.decodeJwtToken(): JSONObject {
+    val parts = this.split("\\.".toRegex()).toTypedArray()
+    val payload = parts.getOrNull(1)
+    val base64String = payload?.decodeFromBase64()
+    base64String.ifNotNullNotEmpty { base64 ->
+        return try {
+            JSONObject(base64)
+        } catch (e: Exception) {
+            JSONObject()
+        }
+    }
+    return JSONObject()
+}
+
+fun String.getValue(key: String): String {
+    val payload = decodeJwtToken()
+    return if (payload.has(key)) {
+        payload.getString(key) ?: ""
+    } else {
+        ""
+    }
+}
+
+fun String.decodeFromBase64(): String {
+    return try {
+        Base64.decode(this, Base64.DEFAULT).toString(charset(Charsets.UTF_8.name()))
+    } catch (e: Exception) {
+        e.printStackTrace()
+        ""
+    }
+}
+
+
+fun String.isValidBase64(): Boolean {
+    val regex = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?\$"
+    val pattern = Pattern.compile(regex)
+    val matcher = pattern.matcher(this)
+    return matcher.find()
+}
+
+
+inline fun String?.ifNotNullNotEmpty(block: (String) -> Unit) {
+    if (!this.isNullOrEmpty()) {
+        block(this)
     }
 }
 

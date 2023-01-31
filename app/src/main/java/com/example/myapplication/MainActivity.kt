@@ -3,8 +3,10 @@ package com.example.myapplication
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
+import org.json.JSONObject
+import java.io.StringReader
 
 
 class MainActivity : AppCompatActivity() {
@@ -13,12 +15,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        Log.d(TAG, "onCreate1: "+ safeCast<EmptyActivity>(this))
-        Log.d(TAG, "onCreate2: "+ safeToCast<EmptyActivity>(this))
-
-        safeCast<EmptyActivity>(this){
-            it.actionBar
+        //Log.d(TAG, "onCreate1: "+ safeCast<EmptyActivity>(this))
+        //Log.d(TAG, "onCreate1: "+ safeCast<EmptyActivity>(this))
+        //val testJson="[{LotDescription:David Weekley homes Traditional Collection in Baxter Village offers floor plans featuring innovative design and unsurpassed quality. This charming community combines work, play and living, all within the Village. In Baxter Village, you&rsquo;ll enjoy:&nbsp; Parks, playgrounds}]"
+        //Log.d(TAG, "CharSets: "+ testJson.decodeJwtToken())
+        //val json = "{\"property:\":\"line1\n,line2\"}"
+        val json = "{property:\":\"line1\n,line2\"}"
+        val jsonSanitized = JsonSanitizer.sanitize(json)
+        val gson = GsonBuilder()
+            .setPrettyPrinting()
+            .setLenient()
+            .create()
+        try {
+            val jsonObject = gson.fromJson(jsonSanitized, JsonObject::class.java)
+            Log.d(TAG, "onCreate 1: $jsonObject")
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+        //Log.d(TAG, "CharSets: "+ json.decodeJwtToken())
+        val jObj = JSONObject(jsonSanitized)
+        Log.d(TAG, "onCreate 2: $jObj")
+        //safeCast<EmptyActivity>(this){
+        //it.actionBar
+        //}
 
 
         /*executeUntil(maxTries = 5, initialDelay = 1000L) { maxTries, executeTimes ->
