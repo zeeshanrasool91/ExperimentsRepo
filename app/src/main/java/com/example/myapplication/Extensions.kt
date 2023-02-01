@@ -176,9 +176,9 @@ fun String.getValue(key: String): String? {
 
 fun String.decodeFromBase64(): String {
     return try {
-        Base64.decode(this, Base64.URL_SAFE).toString(charset(Charsets.UTF_8.name()))
+        val encodedBase64String = this
+        Base64.decode(encodedBase64String, Base64.URL_SAFE).toString(charset(Charsets.UTF_8.name()))
     } catch (e: Exception) {
-        e.printStackTrace()
         ""
     }
 }
