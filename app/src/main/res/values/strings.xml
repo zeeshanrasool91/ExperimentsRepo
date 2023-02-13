@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="show_dialog">Show Dialog</string>
+    <string name="click">Click</string>
 </resources>
