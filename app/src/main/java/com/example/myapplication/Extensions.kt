@@ -2,7 +2,6 @@ package com.example.myapplication
 
 import android.os.Handler
 import android.os.Looper
-import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
 import androidx.core.os.bundleOf
@@ -239,7 +238,7 @@ fun String.isTokenExpired(key: String = "exp", allowedTimeDifference: Int = 5): 
 }
 
 inline fun <reified T : Fragment>
-        newInstance(vararg params: Pair<String, Any>): T =
+        instantiateFragment(vararg params: Pair<String, Any>): T =
     T::class.java.newInstance().apply {
         arguments = bundleOf(*params)
     }

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.txtShowDialog.setOnClickListener {
-            newInstance<TestDialog>(params = arrayOf(Pair("ABCD","DEFGH"))).show(supportFragmentManager,"TEST_DIALOG")
+            instantiateFragment<TestDialog>(params = arrayOf(Pair("ABCD","DEFGH"))).show(supportFragmentManager,"TEST_DIALOG")
             //newInstance2(DummyLayoutBinding::inflate).show(supportFragmentManager,"TEST_DIALOG")
             //TestDialog.instance().show(supportFragmentManager, "TEST_DIALOG")
         }
