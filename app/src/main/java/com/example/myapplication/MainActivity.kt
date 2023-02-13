@@ -3,9 +3,7 @@ package com.example.myapplication
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.BaseDialogFragment.Companion.newInstance2
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.databinding.DummyLayoutBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.txtShowDialog.setOnClickListener {
             //newInstance<TestDialog>().show(supportFragmentManager,"TEST_DIALOG")
-            newInstance2(DummyLayoutBinding::inflate).show(supportFragmentManager,"TEST_DIALOG")
+            //newInstance2(DummyLayoutBinding::inflate).show(supportFragmentManager,"TEST_DIALOG")
+            TestDialog.instance().show(supportFragmentManager,"TEST_DIALOG")
         }
     }
 
