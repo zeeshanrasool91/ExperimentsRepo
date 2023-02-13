@@ -4,9 +4,9 @@ import com.example.myapplication.databinding.DummyLayoutBinding
 
 class TestDialog : BaseDialogFragment<DummyLayoutBinding>(DummyLayoutBinding::inflate) {
 
-    companion object {
+    /*companion object {
         fun instance(): TestDialog {
             return TestDialog()
         }
-    }
+    }*/
 }
