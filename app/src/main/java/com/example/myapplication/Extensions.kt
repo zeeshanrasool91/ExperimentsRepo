@@ -5,6 +5,8 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
@@ -235,5 +237,19 @@ fun String.isTokenExpired(key: String = "exp", allowedTimeDifference: Int = 5): 
         }
     }
 }
+
+inline fun <reified T : Fragment>
+        newInstance(vararg params: Pair<String, Any>): T =
+    T::class.java.newInstance().apply {
+        arguments = bundleOf(*params)
+    }
+
+/*
+inline fun <reified T : Fragment> newInstance(vararg params: Pair<String, Any>) : T{
+            return T::class.java.newInstance().apply {
+                arguments = bundleOf(*params)
+            }
+        }
+*/
 
 
