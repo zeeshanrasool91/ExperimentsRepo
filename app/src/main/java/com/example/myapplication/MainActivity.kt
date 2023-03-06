@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener {
             //CompressionUsingDeflator.main()
+            (application as? MyApplication)?.showCustomToast("ZEESHAN RASOOL")
         }
     }
 
