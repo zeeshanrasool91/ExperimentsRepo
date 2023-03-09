@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityMainBinding
 
@@ -31,14 +32,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.txtShowDialog.setOnClickListener {
-            instantiateFragment<TestDialog>(params = arrayOf(Pair("ABCD","DEFGH"))).show(supportFragmentManager,"TEST_DIALOG")
+            instantiateFragment<TestDialog>(params = arrayOf(Pair("ABCD", "DEFGH"))).show(
+                supportFragmentManager,
+                "TEST_DIALOG"
+            )
             //newInstance2(DummyLayoutBinding::inflate).show(supportFragmentManager,"TEST_DIALOG")
             //TestDialog.instance().show(supportFragmentManager, "TEST_DIALOG")
         }
 
         binding.button.setOnClickListener {
             //CompressionUsingDeflator.main()
-            (application as? MyApplication)?.showCustomToast("ZEESHAN RASOOL")
+            //(application as? MyApplication)?.showCustomToast("ZEESHAN RASOOL")
+            /*val dialog = DummyDialogOne {
+                Toast.makeText(this, "Dummy click", Toast.LENGTH_SHORT).show()
+            }
+            dialog.show(supportFragmentManager, "DummyDialog")*/
+            val dialog = DummyDialogTwo()
+            dialog.setCallback {
+                Toast.makeText(this, "Dummy click", Toast.LENGTH_SHORT).show()
+            }
+            dialog.show(supportFragmentManager, "DummyDialog")
         }
     }
 
