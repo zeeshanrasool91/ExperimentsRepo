@@ -7,7 +7,7 @@ import androidx.lifecycle.coroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+//https://medium.com/android-news/implementing-search-on-type-in-android-with-coroutines-ab117c8f13a4
 open class DebouncingQueryTextListener(
     lifecycle: Lifecycle,
     private val debouncePeriod: Long = 500,
