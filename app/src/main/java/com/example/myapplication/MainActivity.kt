@@ -53,6 +53,12 @@ class MainActivity : AppCompatActivity() {
             }
             dialog.show(supportFragmentManager, "DummyDialog")
         }
+
+        /*val debounceTextWatcher = DebouncingQueryTextListener(lifecycle = this.lifecycle) {
+
+            Log.d(TAG, "UndoBug: ${it?.trim()}")
+        }
+        binding.cevKeyword.getEditText().addTextChangedListener(debounceTextWatcher)*/
     }
 
     private fun getExpiry(index: Int, jwtToken: String) {
