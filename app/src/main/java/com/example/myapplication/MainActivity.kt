@@ -5,6 +5,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityMainBinding
+import java.util.concurrent.TimeUnit
+import kotlin.math.roundToLong
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +49,14 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Dummy click", Toast.LENGTH_SHORT).show()
             }
             dialog.show(supportFragmentManager, "DummyDialog")*/
+
+            val seconds = 0.7 * 1000
+            Toast.makeText(
+                this,
+                "Dummy click${seconds.roundToLong()}",
+                Toast.LENGTH_SHORT
+            ).show()
+
             val dialog = DummyDialogTwo()
             dialog.setCallback {
                 Toast.makeText(this, "Dummy click", Toast.LENGTH_SHORT).show()

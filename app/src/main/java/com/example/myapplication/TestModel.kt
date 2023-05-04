@@ -1,6 +1,3 @@
 package com.example.myapplication
 
-class TestModel {
-
-    var text:CharSequence?=null
-}
+data class TestModel(var text: CharSequence)
