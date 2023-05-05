@@ -10,10 +10,12 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_base64_validity_test)
 
         val users = mutableListOf<User>()
-        for (i in 1..303) {
+        for (i in 1..502) {
             users.add((User(id = i, name = "$i User")))
         }
-        val usersChunked=users.chunked(20)
+        //val usersChunked = users.chunked(20)
+        //val usersChunked = users.chunked(20)
+        val usersChunked = createChunks(users = users, chunkSize = 50)
         Log.d(TAG, "onCreate: $usersChunked")
         /*Log.d(
             TAG,
@@ -26,6 +28,37 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: ${"bdzaskyxndokzch-bnyvm0-6bliivlozomlpihiewdm=".decryptIfValid()}")
 
         Log.d(TAG, "onCreate: ${"rr1lzodpkjthq5lkrlobxyxlksotvb_3jtudjbkzkkm41rst".decryptIfValid()}")*/
+    }
+
+    private fun createChunks(
+        users: MutableList<User>,
+        chunkSize: Int = 10
+    ): MutableList<MutableList<User>> {
+        val chunks = mutableListOf<MutableList<User>>()
+        val totalSize = users.size
+        var totalChunkedSize = 0
+        var count = 0
+        var tempList = mutableListOf<User>()
+        var remainingItems = 0
+        var chunksCount = 0
+        while (totalChunkedSize != totalSize) {
+            count++
+            totalChunkedSize = count
+            tempList.add(users[count - 1])
+            if (totalChunkedSize % chunkSize == 0) {
+                chunks.add(tempList)
+                tempList = mutableListOf()
+                chunksCount += chunkSize
+            }
+            remainingItems = totalChunkedSize - chunksCount
+        }
+        val startIndex = users.size - remainingItems
+        tempList = mutableListOf()
+        for (i in startIndex until users.size) {
+            tempList.add(users[i])
+        }
+        chunks.add(tempList)
+        return chunks
     }
 }
 
