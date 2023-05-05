@@ -251,4 +251,43 @@ inline fun <reified T : Fragment> newInstance(vararg params: Pair<String, Any>) 
         }
 */
 
+fun <T> MutableList<T>.createChunks(chunkSize: Int = 10): MutableList<MutableList<T>> {
+    val items = this
+    val chunks = mutableListOf<MutableList<T>>()
+    val totalSize = items.size
+    var totalChunkedSize = 0
+    var count = 0
+    var tempList = mutableListOf<T>()
+    var remainingItems = 0
+    var chunksCount = 0
+    if (chunkSize == 0 || items.isEmpty()) {
+        tempList = mutableListOf()
+        if(items.isNotEmpty()) {
+            tempList.addAll(items)
+            chunks.add(tempList)
+        }
+        return chunks
+    }
+    while (totalChunkedSize != totalSize) {
+        count++
+        totalChunkedSize = count
+        tempList.add(items[count - 1])
+        if (totalChunkedSize % chunkSize == 0) {
+            chunks.add(tempList)
+            tempList = mutableListOf()
+            chunksCount += chunkSize
+        }
+        remainingItems = totalChunkedSize - chunksCount
+    }
+    val startIndex = items.size - remainingItems
+    tempList = mutableListOf()
+    for (i in startIndex until items.size) {
+        tempList.add(items[i])
+    }
+    if (tempList.isNotEmpty()) {
+        chunks.add(tempList)
+    }
+    return chunks
+}
+
 

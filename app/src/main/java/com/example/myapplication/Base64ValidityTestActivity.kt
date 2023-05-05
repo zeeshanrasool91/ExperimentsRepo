@@ -15,7 +15,8 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         }
         //val usersChunked = users.chunked(20)
         //val usersChunked = users.chunked(20)
-        val usersChunked = createChunks(users = users, chunkSize = 50)
+        //val usersChunked = createChunks(users = users, chunkSize = 50)
+        val usersChunked = users.createChunks(chunkSize = 0)
         Log.d(TAG, "onCreate: $usersChunked")
         /*Log.d(
             TAG,
@@ -41,6 +42,14 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         var tempList = mutableListOf<User>()
         var remainingItems = 0
         var chunksCount = 0
+        if (chunkSize == 0 || users.isEmpty()) {
+            tempList = mutableListOf()
+            if (users.isNotEmpty()) {
+                tempList.addAll(users)
+                chunks.add(tempList)
+            }
+            return chunks
+        }
         while (totalChunkedSize != totalSize) {
             count++
             totalChunkedSize = count
@@ -57,7 +66,9 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         for (i in startIndex until users.size) {
             tempList.add(users[i])
         }
-        chunks.add(tempList)
+        if (tempList.isNotEmpty()) {
+            chunks.add(tempList)
+        }
         return chunks
     }
 }
