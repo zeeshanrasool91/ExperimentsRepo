@@ -9,7 +9,13 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base64_validity_test)
 
-        Log.d(
+        val users = mutableListOf<User>()
+        for (i in 1..303) {
+            users.add((User(id = i, name = "$i User")))
+        }
+        val usersChunked=users.chunked(20)
+        Log.d(TAG, "onCreate: $usersChunked")
+        /*Log.d(
             TAG,
             "onCreate: ${"wzuhjsk94ogekyahcahspmqvheha6k-o3avfnpsgax_jk4ll2hc=".decryptIfValid()}"
         )
@@ -19,6 +25,8 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         )
         Log.d(TAG, "onCreate: ${"bdzaskyxndokzch-bnyvm0-6bliivlozomlpihiewdm=".decryptIfValid()}")
 
-        Log.d(TAG, "onCreate: ${"rr1lzodpkjthq5lkrlobxyxlksotvb_3jtudjbkzkkm41rst".decryptIfValid()}")
+        Log.d(TAG, "onCreate: ${"rr1lzodpkjthq5lkrlobxyxlksotvb_3jtudjbkzkkm41rst".decryptIfValid()}")*/
     }
 }
+
+data class User(val id: Int, val name: String)
