@@ -16,7 +16,8 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         //val usersChunked = users.chunked(20)
         //val usersChunked = users.chunked(20)
         //val usersChunked = createChunks(users = users, chunkSize = 50)
-        val usersChunked = users.createChunks(chunkSize = 0)
+        val usersChunked = createChunksNew(users = users, chunkSize = 50)
+        //val usersChunked = users.createChunks(chunkSize = 0)
         Log.d(TAG, "onCreate: $usersChunked")
         /*Log.d(
             TAG,
@@ -68,6 +69,47 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         }
         if (tempList.isNotEmpty()) {
             chunks.add(tempList)
+        }
+        return chunks
+    }
+
+    private fun createChunksNew(
+        users: MutableList<User>,
+        chunkSize: Int = 10
+    ): MutableMap<Int, MutableList<User>> {
+        val chunks = mutableMapOf<Int, MutableList<User>>()
+        val totalSize = users.size
+        var totalChunkedSize = 0
+        var count = 0
+        var tempList = mutableListOf<User>()
+        var remainingItems = 0
+        var chunksCount = 0
+        if (chunkSize == 0 || users.isEmpty()) {
+            tempList = mutableListOf()
+            if (users.isNotEmpty()) {
+                tempList.addAll(users)
+                chunks[0] = tempList
+            }
+            return chunks
+        }
+        while (totalChunkedSize != totalSize) {
+            count++
+            totalChunkedSize = count
+            tempList.add(users[count - 1])
+            if (totalChunkedSize % chunkSize == 0) {
+                chunks[count] = tempList
+                tempList = mutableListOf()
+                chunksCount += chunkSize
+            }
+            remainingItems = totalChunkedSize - chunksCount
+        }
+        val startIndex = users.size - remainingItems
+        tempList = mutableListOf()
+        for (i in startIndex until users.size) {
+            tempList.add(users[i])
+        }
+        if (tempList.isNotEmpty()) {
+            chunks[startIndex + 1] = tempList
         }
         return chunks
     }
