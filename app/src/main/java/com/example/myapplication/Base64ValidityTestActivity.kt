@@ -7,6 +7,7 @@ import com.example.myapplication.Partition.Companion.ofSize
 import kotlinx.coroutines.Dispatchers
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
+import kotlin.math.log
 
 
 class Base64ValidityTestActivity : AppCompatActivity() {
@@ -26,10 +27,20 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         //val testMethod = testChunks(users = users, chunkSize = 50)
         //val usersChunked = users.createChunks(chunkSize = 0)
         //Log.d(TAG, "onCreate: $usersChunked $testMethod")
-        val partition = ofSize(users, 3)
+        //val partition = ofSize(users, 3)
+        //val partition = users.windowed(50,2,true)
+        val partition = users.batch(50)
         //val partition3 = users.ofSize(3)
         Log.d(TAG, "onCreate: $partition")
 
+        val batched = users.foldIndexed(ArrayList<ArrayList<User>>(users.size / 2)) { index, acc, item ->
+            if (index % 2 == 0) {
+                acc.add(ArrayList(2))
+            }
+            acc.last().add(item)
+            acc
+        }
+        Log.d(TAG, "onCreate: $batched")
         /*Log.d(
             TAG,
             "onCreate: ${"wzuhjsk94ogekyahcahspmqvheha6k-o3avfnpsgax_jk4ll2hc=".decryptIfValid()}"
@@ -143,6 +154,15 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         }
         return result
     }
+
+    private fun <T> Iterable<T>.batch(chunkSize: Int) =
+        withIndex().                        // create index value pairs
+        groupBy { it.index / chunkSize }.   // create grouping index
+        map { parent ->
+            parent.value.map { child ->
+                child.value
+            }
+        }   // split into different partitions
 }
 
 data class User(val id: Int, val name: String)
