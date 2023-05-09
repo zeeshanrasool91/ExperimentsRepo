@@ -1,14 +1,12 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.coroutines.CoroutineScope
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
+
 
 class Base64ValidityTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +22,9 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         //val usersChunked = users.chunked(20)
         //val usersChunked = createChunks(users = users, chunkSize = 50)
         val usersChunked = createChunksNew(users = users, chunkSize = 50)
+        val testMethod = testChunks(users = users, chunkSize = 50)
         //val usersChunked = users.createChunks(chunkSize = 0)
-        Log.d(TAG, "onCreate: $usersChunked")
+        Log.d(TAG, "onCreate: $usersChunked $testMethod")
         /*Log.d(
             TAG,
             "onCreate: ${"wzuhjsk94ogekyahcahspmqvheha6k-o3avfnpsgax_jk4ll2hc=".decryptIfValid()}"
@@ -125,6 +124,19 @@ class Base64ValidityTestActivity : AppCompatActivity() {
             chunks[lastIndex] = tempList
         }
         return chunks
+    }
+
+    fun testChunks(users: MutableList<User>, chunkSize: Int = 3): MutableList<User> {
+        val result = mutableListOf<User>()
+        val counter = AtomicInteger()
+
+        for (user in users) {
+            if (counter.getAndIncrement() % chunkSize == 0) {
+                result.add(user)
+            }
+            result.add(result.size - 1, user)
+        }
+        return result
     }
 }
 
