@@ -15,7 +15,7 @@ class Partition<T>(list: List<T>, private val chunkSize: Int) : AbstractList<Lis
     override fun get(index: Int): List<T> {
         val start = index * chunkSize
         val end = (start + chunkSize).coerceAtMost(list.size)
-        Log.d(TAG, "get: $start -- $end")
+        Log.d(TAG, "get: $index\\$start--$end")
         if (start > end) {
             throw IndexOutOfBoundsException("Index " + index + " is out of the list range <0," + (size - 1) + ">")
         }

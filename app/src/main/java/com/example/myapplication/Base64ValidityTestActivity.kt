@@ -27,7 +27,7 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         //val usersChunked = users.createChunks(chunkSize = 0)
         //Log.d(TAG, "onCreate: $usersChunked $testMethod")
         val partition = ofSize(users, 3)
-        val partition3 = users.ofSize(3)
+        //val partition3 = users.ofSize(3)
         Log.d(TAG, "onCreate: $partition")
 
         /*Log.d(
