@@ -3,6 +3,12 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class Base64ValidityTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +19,7 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         for (i in 1..502) {
             users.add((User(id = i, name = "$i User")))
         }
+        //users.clear()
         //val usersChunked = users.chunked(20)
         //val usersChunked = users.chunked(20)
         //val usersChunked = createChunks(users = users, chunkSize = 50)
@@ -75,8 +82,12 @@ class Base64ValidityTestActivity : AppCompatActivity() {
 
     private fun createChunksNew(
         users: MutableList<User>,
-        chunkSize: Int = 10
+        chunkSize: Int = 10, context: CoroutineContext = Dispatchers.Main
     ): MutableMap<Int, MutableList<User>> {
+        /*val scope = CoroutineScope(context + SupervisorJob())
+        scope.launch {
+
+        }*/
         val chunks = mutableMapOf<Int, MutableList<User>>()
         val totalSize = users.size
         var totalChunkedSize = 0
@@ -88,7 +99,7 @@ class Base64ValidityTestActivity : AppCompatActivity() {
             tempList = mutableListOf()
             if (users.isNotEmpty()) {
                 tempList.addAll(users)
-                chunks[0] = tempList
+                chunks[1] = tempList
             }
             return chunks
         }
@@ -96,6 +107,7 @@ class Base64ValidityTestActivity : AppCompatActivity() {
             count++
             totalChunkedSize = count
             tempList.add(users[count - 1])
+            //Log.d(TAG, "createChunksNew: $count $chunksCount")
             if (totalChunkedSize % chunkSize == 0) {
                 chunks[count] = tempList
                 tempList = mutableListOf()
@@ -104,12 +116,13 @@ class Base64ValidityTestActivity : AppCompatActivity() {
             remainingItems = totalChunkedSize - chunksCount
         }
         val startIndex = users.size - remainingItems
+        val lastIndex = users.size
         tempList = mutableListOf()
-        for (i in startIndex until users.size) {
+        for (i in startIndex until lastIndex) {
             tempList.add(users[i])
         }
         if (tempList.isNotEmpty()) {
-            chunks[startIndex + 1] = tempList
+            chunks[lastIndex] = tempList
         }
         return chunks
     }
