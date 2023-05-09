@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.Partition.Companion.ofSize
 import kotlinx.coroutines.Dispatchers
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
@@ -21,10 +22,14 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         //val usersChunked = users.chunked(20)
         //val usersChunked = users.chunked(20)
         //val usersChunked = createChunks(users = users, chunkSize = 50)
-        val usersChunked = createChunksNew(users = users, chunkSize = 50)
-        val testMethod = testChunks(users = users, chunkSize = 50)
+        //val usersChunked = createChunksNew(users = users, chunkSize = 50)
+        //val testMethod = testChunks(users = users, chunkSize = 50)
         //val usersChunked = users.createChunks(chunkSize = 0)
-        Log.d(TAG, "onCreate: $usersChunked $testMethod")
+        //Log.d(TAG, "onCreate: $usersChunked $testMethod")
+        val partition = ofSize(users, 3)
+        val partition3 = users.ofSize(3)
+        Log.d(TAG, "onCreate: $partition")
+
         /*Log.d(
             TAG,
             "onCreate: ${"wzuhjsk94ogekyahcahspmqvheha6k-o3avfnpsgax_jk4ll2hc=".decryptIfValid()}"
