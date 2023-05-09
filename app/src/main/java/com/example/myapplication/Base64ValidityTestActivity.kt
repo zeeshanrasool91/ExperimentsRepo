@@ -29,7 +29,8 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         //Log.d(TAG, "onCreate: $usersChunked $testMethod")
         //val partition = ofSize(users, 3)
         //val partition = users.windowed(50,2,true)
-        val partition = users.batch(50)
+        //val partition = users.batch(50)
+        val partition = users.windowed(size = 50, step = 50, partialWindows = true)
         //val partition3 = users.ofSize(3)
         Log.d(TAG, "onCreate: $partition")
 
