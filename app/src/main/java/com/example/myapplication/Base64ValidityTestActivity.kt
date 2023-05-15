@@ -15,10 +15,10 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base64_validity_test)
 
-        val users = mutableListOf<User>()
+        /*val users = mutableListOf<User>()
         for (i in 1..502) {
             users.add((User(id = i, name = "$i User")))
-        }
+        }*/
         //users.clear()
         //val usersChunked = users.chunked(20)
         //val usersChunked = users.chunked(20)
@@ -30,18 +30,18 @@ class Base64ValidityTestActivity : AppCompatActivity() {
         //val partition = ofSize(users, 3)
         //val partition = users.windowed(50,2,true)
         //val partition = users.batch(50)
-        val partition = users.windowed(size = 50, step = 50, partialWindows = true)
+        //val partition = users.windowed(size = 50, step = 50, partialWindows = true)
         //val partition3 = users.ofSize(3)
-        Log.d(TAG, "onCreate: $partition")
+        //Log.d(TAG, "onCreate: $partition")
 
-        val batched = users.foldIndexed(ArrayList<ArrayList<User>>(users.size / 2)) { index, acc, item ->
+        /*val batched = users.foldIndexed(ArrayList<ArrayList<User>>(users.size / 2)) { index, acc, item ->
             if (index % 2 == 0) {
                 acc.add(ArrayList(2))
             }
             acc.last().add(item)
             acc
         }
-        Log.d(TAG, "onCreate: $batched")
+        Log.d(TAG, "onCreate: $batched")*/
         /*Log.d(
             TAG,
             "onCreate: ${"wzuhjsk94ogekyahcahspmqvheha6k-o3avfnpsgax_jk4ll2hc=".decryptIfValid()}"
