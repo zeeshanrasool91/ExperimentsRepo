@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
@@ -23,17 +24,24 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
             this,
             R.layout.activity_play_store_search_intent_example
         )
+        val dates = mutableListOf<Long>()
+        for (i in 0..5) {
+            dates.add(TimeUtils.getDates(i))
+        }
         binding.btnSearchOnPlayStore.setOnClickListener {
-            if (binding.tilSearch.editText?.text.isNullOrEmpty()) {
+            /*if (binding.tilSearch.editText?.text.isNullOrEmpty()) {
                 binding.tilSearch.error = "Please enter name"
                 return@setOnClickListener
-            }
+            }*/
             /*this@ActivityPlayStoreSearchIntentExample.searchInGooglePlay(
                 binding.tilSearch.editText?.text?.trim().toString()
             )*/
-            this@ActivityPlayStoreSearchIntentExample.openPlayStore(
+            /*this@ActivityPlayStoreSearchIntentExample.openPlayStore(
                 "com.reasonlabs.familykeeper.parentalcontrol.parents"
-            )
+            )*/
+            dates.forEach {
+                Log.d(TAG, "onCreate123: ${TimeUtils.formatDate(it)}")
+            }
         }
     }
 }
@@ -66,7 +74,12 @@ fun Context.openPlayStore(packageName: String?) {
         return
     }
     try {
-        this.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
+        this.startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("market://details?id=$packageName")
+            )
+        )
     } catch (e: ActivityNotFoundException) {
         this.startActivity(
             Intent(
