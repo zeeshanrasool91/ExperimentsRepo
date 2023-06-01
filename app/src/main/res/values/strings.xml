@@ -4,6 +4,7 @@
     <string name="click">Click</string>
     <string name="do_action">DO ACTION</string>
     <string name="search_in_play_store">Search In Play Store</string>
+    <string name="delayed_check_change_listener">Delayed Check Change Listener</string>
 
 
     <plurals name="date_ordinal_names">

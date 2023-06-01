@@ -30,7 +30,11 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
         for (i in 0..5) {
             dates.add(TimeUtils.getDates(i))
         }
-        binding.btnSearchOnPlayStore.setOnClickListener {
+
+        binding.switch1.setOnCheckChangeListener(1000L) { buttonView, isChecked ->
+            Log.d(TAG, "setOnCheckChangeListener: $buttonView $isChecked")
+        }
+        binding.btnSearchOnPlayStore.setOnClickListener(debounceInterval = 1000L) {
             /*if (binding.tilSearch.editText?.text.isNullOrEmpty()) {
                 binding.tilSearch.error = "Please enter name"
                 return@setOnClickListener
