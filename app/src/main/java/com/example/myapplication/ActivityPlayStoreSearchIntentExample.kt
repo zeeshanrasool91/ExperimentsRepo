@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.databinding.ActivityPlayStoreSearchIntentExampleBinding
+import com.google.common.collect.ImmutableSet
+import com.google.common.collect.Sets
 
 
 class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
@@ -43,6 +45,15 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
                 Log.d(TAG, "onCreate123: ${TimeUtils.formatDate(it)}")
             }
         }
+
+        for (i in 0..5) {
+            dates.add(TimeUtils.getDates(i))
+        }
+
+        val subSet = SubSet()
+        val words ="Hello Zeeshan How are you".split(" ")
+        //Log.d(TAG, "SUBSETEXAMPEL: ${subSet.subsets(arrayListOf("ZEE", "SHA", "N"))}")
+        Log.d(TAG, "SUBSETEXAMPEL: ${subSet.subsets(words)}")
     }
 }
 

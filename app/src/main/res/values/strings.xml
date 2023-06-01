@@ -4,4 +4,12 @@
     <string name="click">Click</string>
     <string name="do_action">DO ACTION</string>
     <string name="search_in_play_store">Search In Play Store</string>
+
+
+    <plurals name="date_ordinal_names">
+        <item quantity="zero">%s st</item>
+        <item quantity="one">%s nd</item>
+        <item quantity="two">%s rd</item>
+        <item quantity="other">%s th</item>
+    </plurals>
 </resources>
