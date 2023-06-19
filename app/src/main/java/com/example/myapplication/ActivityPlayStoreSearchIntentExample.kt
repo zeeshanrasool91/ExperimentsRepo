@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -8,11 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.databinding.ActivityPlayStoreSearchIntentExampleBinding
-import com.google.common.collect.ImmutableSet
-import com.google.common.collect.Sets
 
 
 class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
@@ -46,7 +42,7 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
                 "com.reasonlabs.familykeeper.parentalcontrol.parents"
             )*/
             dates.forEach {
-                Log.d(TAG, "onCreate123: ${TimeUtils.formatDate(it)}")
+                //Log.d(TAG, "onCreate123: ${TimeUtils.formatDate(it)}")
             }
         }
 
@@ -55,9 +51,23 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
         }
 
         val subSet = SubSet()
-        val words ="Hello Zeeshan How are you".split(" ")
+        val words = "Hello Zeeshan How are you".split(" ")
         //Log.d(TAG, "SUBSETEXAMPEL: ${subSet.subsets(arrayListOf("ZEE", "SHA", "N"))}")
-        Log.d(TAG, "SUBSETEXAMPEL: ${subSet.subsets(words)}")
+        //Log.d(TAG, "SUBSETEXAMPEL: ${subSet.subsets(words)}")
+        /*val dom: List<Int> = mutableListOf(1, 2, 3, 4, 5)
+        val list = Generator.combination(words)
+            .simple(2)
+        //.forEach(System.out::println)
+        *//*.forEach(System.out::println)*//*
+        list.forEach {
+            Log.d(TAG, "SUBSETEXAMPEL: $it")
+        }*/
+
+        val generateAllSubsetsOfSizeK = GenerateAllSubsetsOfSizeK()
+        val superSet: MutableList<String> = ArrayList()
+        superSet.addAll(words)
+        //Log.d(TAG, "SUBSETEXAMPEL: ${generateAllSubsetsOfSizeK.getSubsets(superSet, 2)}")
+        Log.d(TAG, "SUBSETEXAMPEL: ${generateAllSubsetsOfSizeK.getSubsets(superSet, 2)}")
     }
 }
 
