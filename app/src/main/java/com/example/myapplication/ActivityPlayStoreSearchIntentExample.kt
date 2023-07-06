@@ -28,9 +28,43 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
         }
 
         binding.switch1.setOnCheckChangeListener(1000L) { buttonView, isChecked ->
-            Log.d(TAG, "setOnCheckChangeListener: $buttonView $isChecked")
+            //Log.d(TAG, "setOnCheckChangeListener: $buttonView $isChecked")
+            val sentence = "i get money i love it i want to buy something"
+            val words = sentence.split(" ")
+            /*val list = Generator.combination(words).simple(2)
+            list.forEach {
+                Log.d(TAG, "SUBSETEXAMPEL: $it")
+            }*/
+
+
+            //val len = words.size
+            //var temp = 0
+            //Total possible subsets for string of size n is n*(n+1)/2
+            //Total possible subsets for string of size n is n*(n+1)/2
+            //val arr = arrayOfNulls<String>(len * (len + 1) / 2)
+
+            //This loop maintains the starting character
+
+            //This loop maintains the starting character
+            //for (i in 0 until len) {
+                //This loop adds the next character every iteration for the subset to form and add it to the array
+                //for (j in i until len) {
+                    //arr[temp] = words[i]
+                    //temp++
+                //}
+            //}
+            val subSet = SubSet()
+            val subsets = subSet.subsets(words).filter { list ->
+                list.isEmpty() || list.size == 2
+
+            }
+            Log.d(TAG, "onCreate: $subsets")
+
         }
         binding.btnSearchOnPlayStore.setOnClickListener(debounceInterval = 1000L) {
+            //val searchString = "ילד דובי"
+            //val words = searchString.split("\\P{L}+".toRegex())
+            //Log.d(TAG, "btnSearchOnPlayStore: $words")
             /*if (binding.tilSearch.editText?.text.isNullOrEmpty()) {
                 binding.tilSearch.error = "Please enter name"
                 return@setOnClickListener
@@ -41,17 +75,17 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
             /*this@ActivityPlayStoreSearchIntentExample.openPlayStore(
                 "com.reasonlabs.familykeeper.parentalcontrol.parents"
             )*/
-            dates.forEach {
+            /*dates.forEach {
                 //Log.d(TAG, "onCreate123: ${TimeUtils.formatDate(it)}")
-            }
+            }*/
         }
 
-        for (i in 0..5) {
+        /*for (i in 0..5) {
             dates.add(TimeUtils.getDates(i))
-        }
+        }*/
 
-        val subSet = SubSet()
-        val words = "Hello Zeeshan How are you".split(" ")
+        //val subSet = SubSet()
+        //val words = "Hello Zeeshan How are you".split(" ")
         //Log.d(TAG, "SUBSETEXAMPEL: ${subSet.subsets(arrayListOf("ZEE", "SHA", "N"))}")
         //Log.d(TAG, "SUBSETEXAMPEL: ${subSet.subsets(words)}")
         /*val dom: List<Int> = mutableListOf(1, 2, 3, 4, 5)
@@ -63,11 +97,11 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
             Log.d(TAG, "SUBSETEXAMPEL: $it")
         }*/
 
-        val generateAllSubsetsOfSizeK = GenerateAllSubsetsOfSizeK()
-        val superSet: MutableList<String> = ArrayList()
-        superSet.addAll(words)
+        //val generateAllSubsetsOfSizeK = GenerateAllSubsetsOfSizeK()
+        //val superSet: MutableList<String> = ArrayList()
+        //superSet.addAll(words)
         //Log.d(TAG, "SUBSETEXAMPEL: ${generateAllSubsetsOfSizeK.getSubsets(superSet, 2)}")
-        Log.d(TAG, "SUBSETEXAMPEL: ${generateAllSubsetsOfSizeK.getSubsets(superSet, 2)}")
+        //Log.d(TAG, "SUBSETEXAMPEL: ${generateAllSubsetsOfSizeK.getSubsets(superSet, 2)}")
     }
 }
 
