@@ -2,9 +2,9 @@ package com.example.myapplication
 
 import android.util.Log
 
-class SubSet {
-    fun <T> subsets(words: List<T>, maxIteration: Int = -1): List<List<T>> {
-        val finalList: MutableList<List<T>> = ArrayList()
+class SubSetUsingHashSet {
+    fun <T> subsets(words: List<T>, maxIteration: Int = -1): List<HashSet<T>> {
+        val finalList: MutableList<HashSet<T>> = ArrayList()
         for (i in 0..words.size) {
             subsets(words, i, finalList, 0, ArrayList(), maxIteration)
         }
@@ -22,14 +22,14 @@ class SubSet {
     private fun <T> subsets(
         words: List<T>,
         currLength: Int,
-        l: MutableList<List<T>>,
+        l: MutableList<HashSet<T>>,
         start: Int,
         curr: MutableList<T>,
         maxIteration: Int
     ) {
         Log.d(TAG, "subsets: $currLength")
         if (curr.size == currLength) {
-            val list = ArrayList(curr)
+            val list = HashSet(curr)
             if (list.isNotEmpty()) {
                 l.add(list)
             }

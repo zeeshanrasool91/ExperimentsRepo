@@ -54,11 +54,13 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
                 //}
             //}
             val subSet = SubSet()
-            val subsets = subSet.subsets(words).filter { list ->
-                list.isEmpty() || list.size == 2
+            val subsets = subSet.subsets(words = words, maxIteration = 2)
 
-            }
             Log.d(TAG, "onCreate: $subsets")
+
+            val subSetUsingHashSet = SubSetUsingHashSet()
+            val arr = subSetUsingHashSet.subsets(words = words, maxIteration = 2)
+            Log.d(TAG, "onCreate: $arr")
 
         }
         binding.btnSearchOnPlayStore.setOnClickListener(debounceInterval = 1000L) {
