@@ -1,9 +1,12 @@
 package com.example.myapplication
 
+import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Base64
 import android.util.Log
+import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
@@ -12,6 +15,10 @@ import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import java.util.regex.Pattern
 
 
@@ -289,5 +296,37 @@ fun <T> MutableList<T>.createChunks(chunkSize: Int = 10): MutableList<MutableLis
     }
     return chunks
 }
+
+
+fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: Date? = null) {
+    isFocusableInTouchMode = false
+    isClickable = true
+    isFocusable = false
+
+    val myCalendar = Calendar.getInstance()
+    val datePickerOnDataSetListener =
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, monthOfYear)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val sdf = SimpleDateFormat(format, Locale.getDefault())
+            setText(sdf.format(myCalendar.time))
+        }
+
+    setOnClickListener {
+        DatePickerDialog(
+            context, datePickerOnDataSetListener, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+            myCalendar.get(Calendar.DAY_OF_MONTH)
+        ).run {
+            maxDate?.time?.also { datePicker.maxDate = it }
+            show()
+        }
+    }
+}
+/*Usage:
+In Activity:
+editText.transformIntoDatePicker(this, "MM/dd/yyyy")
+editText.transformIntoDatePicker(this, "MM/dd/yyyy", Date())*/
 
 

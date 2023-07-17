@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.databinding.ActivityPlayStoreSearchIntentExampleBinding
+import java.util.Date
 
 
 class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
@@ -26,6 +27,9 @@ class ActivityPlayStoreSearchIntentExample : AppCompatActivity() {
         for (i in 0..5) {
             dates.add(TimeUtils.getDates(i))
         }
+        binding.tilSearch.editText?.transformIntoDatePicker(this@ActivityPlayStoreSearchIntentExample,"mm-dd-yyyy",
+            Date()
+        )
 
         binding.switch1.setOnCheckChangeListener(1000L) { buttonView, isChecked ->
             //Log.d(TAG, "setOnCheckChangeListener: $buttonView $isChecked")
