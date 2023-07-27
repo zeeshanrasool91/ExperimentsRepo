@@ -10,10 +10,8 @@ import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
-import com.google.gson.JsonParseException
-import com.google.gson.JsonSyntaxException
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -91,6 +89,7 @@ val Any.TAG: String
     }
 
 
+/*
 inline fun <reified T> String.deserialize(): T? {
     return try {
         val gson = Gson()
@@ -110,6 +109,7 @@ inline fun <reified T> String.deserialize(): T? {
         }
     }
 }
+*/
 
 inline fun <reified T> safeCast(any: Any?): T? {
     return if (any is T) {
@@ -323,6 +323,37 @@ fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: 
             show()
         }
     }
+}
+
+inline fun String?.ifNotNullNorEmpty(block: (String) -> String): String {
+    return if (!this.isNullOrEmpty()) {
+        block(this)
+    } else {
+        orEmpty()
+    }
+}
+
+inline fun <reified T> String?.deserialize(): T? {
+    return try {
+            val gson = getGson()
+            val type = object : TypeToken<T>() {}.type
+            gson.fromJson(this, type)
+    } catch (e: Exception) {
+        null
+    }
+}
+
+inline fun <T> List<T>?.isNotNullNotEmpty(block: (List<T>) -> Unit) {
+    if (!this.isNullOrEmpty()) {
+        block(this)
+    }
+}
+fun Any.toJson(): String? {
+    return getGson().toJson(this)
+}
+
+fun getGson(): Gson {
+    return GsonBuilder().create()
 }
 /*Usage:
 In Activity:
