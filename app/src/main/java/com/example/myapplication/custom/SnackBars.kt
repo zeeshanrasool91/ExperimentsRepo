@@ -1,6 +1,7 @@
 package com.example.myapplication.custom
 
 import android.app.Activity
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.text.TextUtils
 import android.util.Log
@@ -11,8 +12,10 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.CustomConfirmationSnackbarBinding
 import com.example.myapplication.databinding.CustomSnackbarBinding
 import com.example.myapplication.getColorCompat
+import com.example.myapplication.gone
 import com.example.myapplication.invisible
 import com.example.myapplication.isNotNullNorEmpty
+import com.example.myapplication.setTint
 import com.example.myapplication.visible
 import com.google.android.material.snackbar.Snackbar
 
@@ -87,10 +90,10 @@ fun Activity.showSnackBar(
                 binding = binding,
                 message = message,
                 snackBarType = snackBarType,
-                activity1 = this@showSnackBar,
+                activity = this@showSnackBar,
                 cancelFun = cancelFun,
                 customSnackBar = customSnackBar,
-                actionLbl = actionLbl
+                actionLbl = actionLbl,
             )
         }
     ).apply {
@@ -116,7 +119,7 @@ private fun bindData(
     binding: CustomSnackbarBinding,
     message: String?,
     snackBarType: SnackBarType,
-    activity1: Activity,
+    activity: Activity,
     cancelFun: ((isFinishingOrDestroyed: Boolean, closedManually: Boolean) -> Unit)?,
     customSnackBar: CustomSnackBar<CustomSnackbarBinding>,
     actionLbl: String?
@@ -124,20 +127,21 @@ private fun bindData(
     binding.txtMessage.text = message
     binding.imgStatus.setImageResource(snackBarType.getIcon())
     binding.cardViewParent.setCardBackgroundColor(
-        activity1.getColorCompat(
+        activity.getColorCompat(
             snackBarType.cardBackgroundColor
         )
     )
     binding.txtMessage.text =
-        if (TextUtils.isEmpty(message)) activity1.getString(snackBarType.getMessage()) else message
-    binding.txtMessage.setTextColor(activity1.getColorCompat(snackBarType.textColor()))
+        if (TextUtils.isEmpty(message)) activity.getString(snackBarType.getMessage()) else message
+    binding.txtMessage.setTextColor(activity.getColorCompat(snackBarType.textColor()))
     binding.imgClose.setColorFilter(
-        activity1.getColorCompat(snackBarType.textColor()),
+        activity.getColorCompat(snackBarType.textColor()),
         PorterDuff.Mode.SRC_ATOP
     )
+    /*binding.imgClose.setTint(snackBarType.textColor())*/
     binding.imgClose.setOnClickListener {
         cancelFun?.invoke(
-            (activity1.isFinishing || activity1.isDestroyed),
+            (activity.isFinishing || activity.isDestroyed),
             true
         )
         customSnackBar.dismiss()
@@ -145,13 +149,13 @@ private fun bindData(
 
     if (actionLbl.isNotNullNorEmpty()) {
         binding.tvActionLbl.visible()
-        binding.imgClose.invisible()
+        binding.imgClose.gone()
         binding.tvActionLbl.text = actionLbl
     }
 
     binding.tvActionLbl.setOnClickListener {
         cancelFun?.invoke(
-            (activity1.isFinishing || activity1.isDestroyed),
+            (activity.isFinishing || activity.isDestroyed),
             true
         )
         customSnackBar.dismiss()

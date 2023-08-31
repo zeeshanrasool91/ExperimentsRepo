@@ -77,7 +77,7 @@ class CustomSnackBar<DB : ViewDataBinding>(
 
     fun dismiss() {
         if (snackBar.isShown) {
-            snackBar.show()
+            snackBar.dismiss()
         }
     }
 

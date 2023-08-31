@@ -2,17 +2,21 @@ package com.example.myapplication
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Handler
 import android.os.Looper
 import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -371,6 +375,10 @@ fun View.invisible(invisible: Boolean = true) {
     this.isInvisible = invisible
 }
 
+fun View.gone(gone: Boolean = true) {
+    this.isGone = gone
+}
+
 fun View.visible(visible: Boolean = true) {
     this.isVisible = visible
 }
@@ -381,6 +389,10 @@ fun View.disable() {
 
 fun View.enable() {
     this.isEnabled = true
+}
+
+fun ImageView.setTint(@ColorRes colorRes: Int) {
+    ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, colorRes)))
 }
 /*Usage:
 In Activity:
