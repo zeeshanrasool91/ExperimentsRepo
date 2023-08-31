@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/offset_5"
+        android:minHeight="@dimen/offset_70"
+        app:cardBackgroundColor="@color/error_80"
+        app:cardCornerRadius="@dimen/offset_12"
+        app:cardElevation="0dp"
+        app:contentPadding="@dimen/offset_12">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clParent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_status"
+                android:layout_width="@dimen/offset_24"
+                android:layout_height="@dimen/offset_24"
+                android:layout_marginStart="@dimen/offset_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txt_message"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_delete_outlined" />
+
+
+            <com.example.myapplication.UnderLineButtonView
+                android:id="@+id/btnUndo"
+                style="@style/UnderLineBorderLessButtonStyle"
+                android:text="@string/lbl_undo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_message"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_message"
+                style="@style/ContentSnackBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/offset_16"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text="@string/msg_you_deleted_the_word"
+                android:textColor="@color/error"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnUndo"
+                app:layout_constraintHeight="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/img_status"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem/random" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
