@@ -5,6 +5,15 @@
     <string name="do_action">DO ACTION</string>
     <string name="search_in_play_store">Search In Play Store</string>
     <string name="delayed_check_change_listener">Delayed Check Change Listener</string>
+    <string name="lbl_alert_state">Alert state.</string>
+    <string name="lbl_error_state">Error state.</string>
+    <string name="lbl_success_state">Success state.</string>
+    <string name="lbl_success">Success</string>
+    <string name="lbl_restart">Restart</string>
+
+    <string name="lbl_undo">&#160;Undo&#160;</string>
+    <string name="msg_you_deleted_the_word">You deleted the keyword \"%s\"</string>
+    <string name="show_snack_bar">Show Snack Bar %s</string>
 
 
     <plurals name="date_ordinal_names">

@@ -6,8 +6,13 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -354,6 +359,28 @@ fun Any.toJson(): String? {
 
 fun getGson(): Gson {
     return GsonBuilder().create()
+}
+
+fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
+    return ContextCompat.getColor(this, colorRes)
+}
+
+fun String?.isNotNullNorEmpty(): Boolean = this.isNullOrEmpty().not()
+
+fun View.invisible(invisible: Boolean = true) {
+    this.isInvisible = invisible
+}
+
+fun View.visible(visible: Boolean = true) {
+    this.isVisible = visible
+}
+
+fun View.disable() {
+    this.isEnabled = false
+}
+
+fun View.enable() {
+    this.isEnabled = true
 }
 /*Usage:
 In Activity:

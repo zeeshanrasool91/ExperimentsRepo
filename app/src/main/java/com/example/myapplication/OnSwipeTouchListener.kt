@@ -30,7 +30,10 @@ open class OnSwipeTouchListener(context: Context) : OnTouchListener {
         screenCenter = ((width) * 50 / 100).toFloat()
     }
     override fun onTouch(v: View, event: MotionEvent): Boolean {
-        v.performClick()
+        when (event.action) {
+            MotionEvent.ACTION_UP -> v.performClick()
+            else -> {}
+        }
         return gestureDetector.onTouchEvent(event)
     }
 

@@ -7,4 +7,108 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="color_primary">#5A5AFF</color>
+    <color name="color_primary_dark">#4848CC</color>
+    <color name="color_status_bar">#008ADA</color>
+    <color name="color_accent">#3EC0F1</color>
+    <color name="blue_dark_5">#4A79B7</color>
+    <color name="blue_dark_8">#3B5998</color>
+
+
+
+    <color name="purple">#5A5AFF</color>
+    <color name="purple_180">#121233</color>
+    <color name="purple_160">#242466</color>
+    <color name="purple_140">#363699</color>
+    <color name="purple_120">#4848CC</color>
+    <color name="purple_80">#7B7BFF</color>
+    <color name="purple_60">#9C9CFF</color>
+    <color name="purple_40">#BDBDFF</color>
+    <color name="purple_20">#DEDEFF</color>
+    <color name="purple_light">#A395FC</color>
+    <color name="purple_light_80">#B5AAFD</color>
+    <color name="purple_light_60">#C8BFFD</color>
+    <color name="purple_light_40">#DAD5FE</color>
+    <color name="purple_light_20">#EDEAFE</color>
+    <color name="purple_light_10">#F6F4FF</color>
+
+    <color name="green">#31BB98</color>
+    <color name="green_180">#0A251E</color>
+    <color name="green_160">#144B3D</color>
+    <color name="green_140">#1D705B</color>
+    <color name="green_120">#27967A</color>
+    <color name="green_80">#5AC9AD</color>
+    <color name="green_60">#83D6C1</color>
+    <color name="green_40">#ADE4D6</color>
+    <color name="green_20">#D6F1EA</color>
+    <color name="green_light">#D2F6C5</color>
+    <color name="green_light_20">#F6FDF3</color>
+
+    <color name="orange">#FF785A</color>
+    <color name="orange_180">#331812</color>
+    <color name="orange_160">#663024</color>
+    <color name="orange_140">#994836</color>
+    <color name="orange_120">#CC6048</color>
+    <color name="orange_90">#FE6565</color>
+    <color name="orange_80">#FF937B</color>
+    <color name="orange_60">#FFAE9C</color>
+    <color name="orange_40">#FFC9BD</color>
+    <color name="orange_20">#FFE4DE</color>
+
+    <color name="yellow">#FECA51</color>
+    <color name="yellow_180">#332810</color>
+    <color name="yellow_160">#665120</color>
+    <color name="yellow_140">#987931</color>
+    <color name="yellow_120">#CBA241</color>
+    <color name="yellow_90">#F6A507</color>
+    <color name="yellow_80">#FED574</color>
+    <color name="yellow_60">#FEDF97</color>
+    <color name="yellow_40">#FFEAB9</color>
+    <color name="yellow_20">#FFF4DC</color>
+
+    <color name="pink">#FEC8EF</color>
+    <color name="pink_20">#FFF4FC</color>
+
+    <color name="dark_gray">#0D123A</color>
+    <color name="dark_gray_120">#39364C</color>
+    <color name="dark_gray_80">#3D4161</color>
+    <color name="dark_gray_60">#6E7189</color>
+    <color name="dark_gray_40">#9EA0B0</color>
+    <color name="dark_gray_20">#CFD0D8</color>
+    <color name="dark_gray_10">#E7E7EB</color>
+    <color name="dark_gray_5">#F1F2F4</color>
+    <color name="light_gray">#F1F4F8</color>
+    <color name="light_gray_120">#EDF1F5</color>
+    <color name="light_gray_60">#F7F8FB</color>
+    <color name="light_gray_40">#F9FBFC</color>
+    <color name="light_gray_20">#FCFDFE</color>
+
+    <color name="red">#E11F4E</color>
+    <color name="transparent">#00000000</color>
+    <color name="border_color">#E5E5E5</color>
+    <color name="border_color_focused">#0D123A</color>
+    <color name="background_color">#F0F4F8</color>
+
+    <color name="alert_120">#9F4E02</color>
+    <color name="alert">#F6A507</color>
+    <color name="alert_80">#FFF4DC</color>
+
+    <color name="error_120">#662010</color>
+    <color name="error">#FE6565</color>
+    <color name="error_80">#FFDED6</color>
+
+
+    <color name="success_120">#144B3D</color>
+    <color name="success">#49DDB8</color>
+    <color name="success_80">#D6F1EA</color>
+    <color name="snack_bar_default">#121133</color>
+    <color name="snack_bar_success_light">#D6F2EA</color>
+    <color name="snack_bar_alert_light">#FFF5DC</color>
+    <color name="snack_bar_alert_light_text_color">#712E20</color>
+    <color name="snack_bar_error_light">#FEDED7</color>
+
+    <color name="snack_bar_error_light_text_color">#A15205</color>
+    <color name="snack_bar_success_light_text_color">#225648</color>
 </resources>

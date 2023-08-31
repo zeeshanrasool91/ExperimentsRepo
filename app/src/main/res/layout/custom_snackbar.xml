@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/offset_70"
+        android:id="@+id/cardViewParent"
+        app:cardBackgroundColor="@color/snack_bar_default"
+        app:cardCornerRadius="@dimen/offset_12"
+        app:cardElevation="0dp"
+        android:layout_margin="@dimen/offset_5"
+        app:contentPadding="@dimen/offset_12">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/clParent"
+            android:layout_gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_status"
+                android:layout_width="@dimen/offset_24"
+                android:layout_height="@dimen/offset_24"
+                android:layout_marginStart="@dimen/offset_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txt_message"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_success" />
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_message"
+                style="@style/ContentSnackBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/offset_16"
+                android:layout_marginEnd="@dimen/offset_16"
+                android:ellipsize="end"
+                android:maxLines="5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvActionLbl"
+                app:layout_constraintHeight="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/img_status"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem/random" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_close"
+                android:layout_width="@dimen/offset_24"
+                android:layout_height="@dimen/offset_24"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvActionLbl"
+                app:layout_constraintEnd_toEndOf="@+id/tvActionLbl"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_close"
+                app:tint="@color/light_gray_20" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvActionLbl"
+                style="@style/ContentSnackBar"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/offset_8"
+                android:layout_marginEnd="@dimen/offset_16"
+                android:maxLines="1"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_message"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHeight="wrap_content"
+                android:text="@string/lbl_restart"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
