@@ -1,6 +1,5 @@
 package com.example.myapplication.custom
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
