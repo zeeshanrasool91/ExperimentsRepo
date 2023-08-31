@@ -9,7 +9,7 @@ import com.example.myapplication.custom.showUndoSnackBar
 import com.google.android.material.button.MaterialButton
 
 class MainActivityNew : AppCompatActivity() {
-    var count = 0
+    private var count = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_new)
@@ -75,6 +75,9 @@ class MainActivityNew : AppCompatActivity() {
                         actionLbl = "Reset Count $count",
                         cancelFun = { isFinishingOrDestroyed, closedManually ->
                             count = 0
+                            btnShowSnackBar.text =
+                                getString(R.string.show_snack_bar, count.toString())
+                            Log.d(TAG, "FinalSnackBar:$isFinishingOrDestroyed $closedManually ")
                         })
                 }
 

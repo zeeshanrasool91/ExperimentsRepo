@@ -72,7 +72,7 @@ fun Activity.showSnackBar(
     cancelFun: ((isFinishingOrDestroyed: Boolean, closedManually: Boolean) -> Unit)? = null
 ) {
 
-
+    /*<CustomSnackbarBinding>*/
     CustomSnackBar(
         activity = this@showSnackBar,
         layoutRes = R.layout.custom_snackbar,
@@ -95,6 +95,7 @@ fun Activity.showSnackBar(
         }
     ).apply {
         /*this.bindData = { binding ->
+            Log.d("SNACK_BAR_TEST", "showSnackBar Init:  $binding")
             bindData(
                 binding = binding,
                 message = message,
