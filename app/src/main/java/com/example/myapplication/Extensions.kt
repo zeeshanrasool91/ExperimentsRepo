@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
@@ -393,6 +394,14 @@ fun View.enable() {
 
 fun ImageView.setTint(@ColorRes colorRes: Int) {
     ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, colorRes)))
+}
+
+fun Context.getSafeString(@StringRes stringRes: Int): String? {
+    return if (stringRes == -1) {
+        null
+    } else {
+        this.getString(stringRes)
+    }
 }
 /*Usage:
 In Activity:

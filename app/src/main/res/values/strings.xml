@@ -10,6 +10,7 @@
     <string name="lbl_success_state">Success state.</string>
     <string name="lbl_success">Success</string>
     <string name="lbl_restart">Restart</string>
+    <string name="lbl_empty_string"/>
 
     <string name="lbl_undo">&#160;Undo&#160;</string>
     <string name="msg_you_deleted_the_word">You deleted the keyword \"%s\"</string>

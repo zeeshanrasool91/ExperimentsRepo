@@ -2,28 +2,18 @@ package com.example.myapplication.custom
 
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
+import java.sql.ClientInfoStatus
 
-enum class SnackBarType(
-    var setStatus: Int,
-    var setCardBackgroundColor: Int,
-    var setMessage: String? = null,
-    var setActionLabel: String? = null,
-    var setIcon: Int = R.drawable.ic_success,
-    var setTintColor: Int = R.color.white,
-    var setTextColor: Int = R.color.white,
-    var setSnackBarLength: Int = Snackbar.LENGTH_SHORT,
-    var setMessageRes: Int = R.string.lbl_error_state,
-    var setActionLabelRes: Int = R.string.lbl_error_state,
-    var setActionTextColor: Int = R.color.white,
-    var setActionType: Int = SnackBarType.ACTION_CLOSE
-) : SnackBarTypeMetaData {
+sealed class SnackBar(open val status: Int, open val cardBackgroundColor: Int) :
+    SnackBarMetaData {
 
-    SUCCESS(0, R.color.snack_bar_default) {
+    object SUCCESS : SnackBar(status = 0, cardBackgroundColor = R.color.snack_bar_default) {
         override fun getMessage(): Int {
             return R.string.lbl_success_state
         }
-    },
-    ALERT(1, R.color.snack_bar_default) {
+    }
+
+    object ALERT : SnackBar(status = 1, cardBackgroundColor = R.color.snack_bar_default) {
         override fun getMessage(): Int {
             return R.string.lbl_alert_state
         }
@@ -32,8 +22,9 @@ enum class SnackBarType(
             return R.drawable.ic_alert
         }
 
-    },
-    ERROR(2, R.color.snack_bar_default) {
+    }
+
+    object ERROR : SnackBar(status = 2, cardBackgroundColor = R.color.snack_bar_default) {
 
         override fun getMessage(
         ): Int {
@@ -43,8 +34,12 @@ enum class SnackBarType(
         override fun getIcon(): Int {
             return R.drawable.ic_error
         }
-    },
-    SUCCESS_LIGHT(3, R.color.snack_bar_success_light) {
+    }
+
+    object SUCCESS_LIGHT : SnackBar(
+        status = 3,
+        cardBackgroundColor = R.color.snack_bar_success_light
+    ) {
         override fun getMessage(): Int {
             return R.string.lbl_success_state
         }
@@ -56,8 +51,9 @@ enum class SnackBarType(
         override fun getTextColor(): Int {
             return R.color.snack_bar_success_light_text_color
         }
-    },
-    ALERT_LIGHT(4, R.color.snack_bar_alert_light) {
+    }
+
+    object ALERT_LIGHT : SnackBar(status = 4, cardBackgroundColor = R.color.snack_bar_alert_light) {
 
         override fun getMessage(): Int {
             return R.string.lbl_alert_state
@@ -75,8 +71,9 @@ enum class SnackBarType(
             return R.color.snack_bar_alert_light_text_color
         }
 
-    },
-    ERROR_LIGHT(5, R.color.snack_bar_error_light) {
+    }
+
+    object ERROR_LIGHT : SnackBar(status = 5, cardBackgroundColor = R.color.snack_bar_error_light) {
 
         override fun getMessage(
         ): Int {
@@ -94,8 +91,9 @@ enum class SnackBarType(
         override fun getTextColor(): Int {
             return R.color.snack_bar_error_light_text_color
         }
-    },
-    BUTTON(6, R.color.snack_bar_error_light) {
+    }
+
+    object BUTTON : SnackBar(status = 6, cardBackgroundColor = R.color.snack_bar_error_light) {
 
         override fun getMessage(
         ): Int {
@@ -122,8 +120,9 @@ enum class SnackBarType(
         ): Int {
             return R.string.lbl_undo
         }
-    },
-    LABEL(6, R.color.snack_bar_default) {
+    }
+
+    object LABEL : SnackBar(6, R.color.snack_bar_default) {
 
         override fun getMessage(): Int {
             return R.string.lbl_restart
@@ -136,8 +135,26 @@ enum class SnackBarType(
         override fun getActionLabel(): Int {
             return R.string.lbl_restart
         }
-    },
-    CUSTOM(7, R.color.snack_bar_default);
+    }
+
+    data class CUSTOM(
+       /* override val status: Int = 7,
+        override val cardBackgroundColor: Int = R.color.snack_bar_default,*/
+        var setMessage: String? = null,
+        var setActionLabel: String? = null,
+        var setIcon: Int = R.drawable.ic_success,
+        var setTintColor: Int = R.color.white,
+        var setTextColor: Int = R.color.white,
+        var setSnackBarLength: Int = Snackbar.LENGTH_SHORT,
+        var setMessageRes: Int = R.string.lbl_error_state,
+        var setActionLabelRes: Int = R.string.lbl_error_state,
+        var setActionTextColor: Int = R.color.white,
+        var setActionType: Int = NO_ACTION
+    ) : SnackBar(status = 7, cardBackgroundColor = R.color.snack_bar_default) {
+
+    }
+   /* ) : SnackBar(status = status, cardBackgroundColor = cardBackgroundColor) {
+    }*/
 
     companion object {
         const val ACTION_CLOSE = 0
@@ -147,7 +164,8 @@ enum class SnackBarType(
     }
 }
 
-interface SnackBarTypeMetaData {
+
+interface SnackBarMetaData {
     fun getIcon(): Int = R.drawable.ic_success
     fun getTintColor(): Int = R.color.white
     fun getTextColor(): Int = R.color.white
@@ -160,3 +178,4 @@ interface SnackBarTypeMetaData {
 
     fun getActionType(): Int = SnackBarType.ACTION_CLOSE
 }
+

@@ -1,7 +1,6 @@
 package com.example.myapplication.custom
 
 import android.app.Activity
-import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.text.TextUtils
 import android.util.Log
@@ -13,9 +12,7 @@ import com.example.myapplication.databinding.CustomConfirmationSnackbarBinding
 import com.example.myapplication.databinding.CustomSnackbarBinding
 import com.example.myapplication.getColorCompat
 import com.example.myapplication.gone
-import com.example.myapplication.invisible
 import com.example.myapplication.isNotNullNorEmpty
-import com.example.myapplication.setTint
 import com.example.myapplication.visible
 import com.google.android.material.snackbar.Snackbar
 
@@ -128,14 +125,14 @@ private fun bindData(
     binding.imgStatus.setImageResource(snackBarType.getIcon())
     binding.cardViewParent.setCardBackgroundColor(
         activity.getColorCompat(
-            snackBarType.cardBackgroundColor
+            snackBarType.setCardBackgroundColor
         )
     )
     binding.txtMessage.text =
         if (TextUtils.isEmpty(message)) activity.getString(snackBarType.getMessage()) else message
-    binding.txtMessage.setTextColor(activity.getColorCompat(snackBarType.textColor()))
+    binding.txtMessage.setTextColor(activity.getColorCompat(snackBarType.getTextColor()))
     binding.imgClose.setColorFilter(
-        activity.getColorCompat(snackBarType.textColor()),
+        activity.getColorCompat(snackBarType.getTextColor()),
         PorterDuff.Mode.SRC_ATOP
     )
     /*binding.imgClose.setTint(snackBarType.textColor())*/
