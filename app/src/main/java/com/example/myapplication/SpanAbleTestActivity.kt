@@ -1,14 +1,24 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
+import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.util.Log
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.myapplication.custom.LinkTouchMovementMethod
 import com.example.myapplication.databinding.ActivitySpanableTestBinding
 import java.util.regex.Pattern
+
 
 class SpanAbleTestActivity : AppCompatActivity() {
 
@@ -30,13 +40,40 @@ class SpanAbleTestActivity : AppCompatActivity() {
             "https://www.geeksforgeeks.org/"
         )
         domains.forEach {
-            Log.d(TAG, "isValidDomain: ${it}\n${isValidDomain(it)}")
+            //Log.d(TAG, "isValidDomain: ${it}\n${isValidDomain(it)}")
         }
         val words = listOf("spooge")
-        val sentence = "You kid searched for spooge word".appendInvertedCommas(words = words)
-        binding.textView.text =
-            sentence.highlightUsingRegex(words = words, color = getColorCompat(R.color.error))
+        val sentence = "www.gooogle.com You kid searched for spooge word".appendInvertedCommas(words = words)
+        binding.textView.text = sentence.highlightUsingRegex(words = words, color = getColorCompat(R.color.error))
+
+        //underLineClickableSpan(binding.textView)
+
+        binding.textView.movementMethod = LinkTouchMovementMethod()
     }
+}
+
+fun underLineClickableSpan(textView: TextView) {
+    val linkClick: ClickableSpan = object : ClickableSpan() {
+        override fun onClick(view: View) {
+            Toast.makeText(textView.context, "Link Click", Toast.LENGTH_SHORT).show()
+            view.invalidate()
+        }
+
+        override fun updateDrawState(ds: TextPaint) {
+            if (textView.isPressed) {
+                ds.setColor(Color.BLUE)
+            } else {
+                ds.setColor(Color.RED)
+                ds.isUnderlineText = true
+            }
+            textView.invalidate()
+        }
+    }
+    textView.highlightColor = Color.TRANSPARENT
+    val spannableString: Spannable = SpannableString("Link in TextView")
+    spannableString.setSpan(linkClick, 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    textView.setText(spannableString, TextView.BufferType.SPANNABLE)
+    textView.movementMethod = LinkMovementMethod.getInstance()
 }
 
 fun isValidDomain(domain: String): Boolean {
