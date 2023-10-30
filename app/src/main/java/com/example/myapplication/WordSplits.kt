@@ -25,7 +25,7 @@ object WordSplits {
         line: String,
         first: List<String>, second: List<String>
     ): Map<String, List<Int>> {
-        val occurences: Map<String, List<Int>> = LinkedHashMap()
+        val occurrences: Map<String, List<Int>> = LinkedHashMap()
         val first2RestWords = first2rest(first)
         val second2RestWords = first2rest(second)
         val wordMatcher = Pattern.compile("\\w+").matcher(line)
@@ -60,13 +60,13 @@ object WordSplits {
                 println("$word does not belong to any list")
             }
             // Take some action
-            start = wordMatcher.start() + Math.max(maxWordFirst.length, maxWordSecond.length) + 1
-            start = Math.max(wordMatcher.end(), start)
+            start = wordMatcher.start() + maxWordFirst.length.coerceAtLeast(maxWordSecond.length) + 1
+            start = wordMatcher.end().coerceAtLeast(start)
         }
-        return occurences
+        return occurrences
     }
 
-    fun longestMatch(line: String, wordList: List<String>): String {
+    private fun longestMatch(line: String, wordList: List<String>): String {
         var maxWord = ""
         // poor way to compare
         for (word in wordList) {
